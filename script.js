@@ -12,7 +12,7 @@ function initBoard() {
     let board = document.getElementById("game-board");
 
     // Loop that creates the rows and boxes based on the guesses / word length
-    for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
+    for (let i = 0; i < GUESSES; i++) {
         let row = document.createElement("div")
         row.className = "letter-row"
 
