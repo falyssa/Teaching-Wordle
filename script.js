@@ -89,12 +89,12 @@ function checkGuess () {
     }
 
     if (guessString.length != 5) {
-        alert("Not enough letters!")
+        toastr.error("Not enough letters!")
         return
     }
 
     if (!WORDS.includes(guessString)) {
-        alert("Word not in list!")
+        toastr.error("Word not in list!")
         return
     }
 
@@ -136,8 +136,40 @@ function checkGuess () {
         nextLetter = 0;
 
         if (guessesRemaining === 0) {
-            alert("You've run out of guesses! Game over!")
-            alert(`The right word was: "${rightGuessString}"`)
+            toastr.error("You've run out of guesses! Game over!")
+            toastr.error(`The right word was: "${rightGuessString}"`)
         }
     }
 }
+
+function shadeKeyBoard(letter, color) {
+    for (const elem of document.getElementsByClassName("keyboard-button")) {
+        if (elem.textContent === letter) {
+            let oldColor = elem.style.backgroundColor 
+            if (oldColor === 'green') {
+                return
+            }
+            if (oldColor === 'yellow' && color != 'green') {
+                return
+            }
+            elem.style.backgroundColor = color
+            break
+        }
+    }
+}
+
+// Shows the on-screen input 
+document.getElementById("keyboard-cont").addEventListener("click", (e) => {
+    const target = e.target
+
+    if (!target.classList.contains("keyboard-button")) {
+        return
+    }
+    let key = target.textContent
+
+    if (key === "Del") {
+        key = "Backspace"
+    } 
+
+    document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
+})
