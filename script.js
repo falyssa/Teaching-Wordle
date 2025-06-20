@@ -78,3 +78,23 @@ function deleteLetter () {
     currentGuess.pop()
     nextLetter -= 1
 }
+
+function checkGuess () {
+    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let guessString = ''
+    let rightGuess = Array.from(rightGuessString)
+
+    for (const val of currentGuess) {
+        guessString += val
+    }
+
+    if (guessString.length != 5) {
+        alert("Not enough letters!")
+        return
+    }
+
+    if (!WORDS.includes(guessString)) {
+        alert("Word not in list!")
+        return
+    }
+}
